@@ -1,5 +1,7 @@
 # Smart City Traffic Forecasting
 
+[View the Full Project Report](PROJECT_REPORT.md)
+
 This repository contains a machine learning pipeline to forecast traffic volume across city junctions. The project focuses on converting raw time-series data into a supervised regression framework using XGBoost.
 
 ## Project Architecture
