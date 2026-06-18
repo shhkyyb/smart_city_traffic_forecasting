@@ -1,7 +1,7 @@
 # Project Report: Smart City Traffic Forecasting
 
 **Company Partner**: UniConverge Technologies (UCT)  
-**Author**: shhkyyb  
+**Author**: shakib-ahmad  
 **Date**: June 2026  
 
 ---
