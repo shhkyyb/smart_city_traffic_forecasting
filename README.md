@@ -1,38 +1,41 @@
-# 🏙️ Smart City Traffic Forecasting
+# Smart City Traffic Forecasting
 
-A machine learning project to forecast traffic patterns at key city junctions using supervised learning (XGBoost). This model is designed to help local governments optimize infrastructure and prepare for traffic peaks.
+This repository contains a machine learning pipeline to forecast traffic volume across city junctions. The project focuses on converting raw time-series data into a supervised regression framework using XGBoost.
 
-## 📊 Project Highlights
-*   **71.08% Improvement** in prediction accuracy over baseline average guessing.
-*   **Validation RMSE**: 8.21 vehicles (meaning predictions are off by only 8 vehicles on average).
-*   **Techniques**: Time-series feature engineering, chronological data splitting, Gradient Boosted Decision Trees.
+## Project Architecture
+The project is structured into modular scripts:
+*   `eda.py`: Preliminary dataset inspection and summary statistics.
+*   `visualize.py`: Extracts temporal seasonality and saves exploratory plots.
+*   `train_predict.py`: Handles feature engineering, chronological data splitting, model training, evaluation, and prediction visualization.
 
-## 🛠️ Features Engineered
-XGBoost cannot read dates directly, so we extracted:
-*   `Hour` (0-23): To capture daily rush-hour cycles.
-*   `DayOfWeek` (0-6): To distinguish between weekdays and weekends.
-*   `Month` (1-12): To handle monthly/seasonal variation.
+## Feature Engineering
+Temporal components were engineered from the raw `DateTime` field:
+*   `Hour` (0-23) to capture intra-day cycles.
+*   `DayOfWeek` (0-6) to capture weekly commute behavior.
+*   `DayOfMonth` and `Month` to capture monthly seasonality.
 
-## 📈 Visual Results
+## Modeling & Evaluation
+To evaluate model performance under realistic forecasting constraints, we split the dataset chronologically (80% training, 20% validation).
 
-### 1. Hourly Traffic Average
-Most junctions experience a major surge in traffic around the 19th hour (7:00 PM), with nighttime hours being quiet.
-![Hourly Averages](traffic_hourly_average.png)
+An XGBoost Regressor was trained on the engineered features:
+*   **Validation RMSE**: 8.21 vehicles
+*   **Baseline (Historical Mean) RMSE**: 28.41 vehicles
+*   **Performance Gain**: 71.08% improvement over the baseline guess.
 
-### 2. Actual vs. Predicted Traffic
-Our XGBoost model tracks actual hourly traffic volume extremely closely over the forecast period:
-![Actual vs Predicted](actual_vs_predicted_traffic.png)
-
-## ⚙️ Setup and Installation
+## Usage
 1. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-2. Run EDA:
+2. Run Exploratory Data Analysis:
    ```bash
    python eda.py
    ```
-3. Train model & generate plots:
+3. Generate traffic visualization plots:
+   ```bash
+   python visualize.py
+   ```
+4. Train the model and plot forecasts:
    ```bash
    python train_predict.py
    ```
